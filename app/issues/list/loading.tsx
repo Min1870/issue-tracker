@@ -2,8 +2,9 @@ import { Skeleton } from "@/app/components";
 import { Table } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
 
-const LoadingIssuePage = () => {
+const LoadingIssuesPage = () => {
   const issues = [1, 2, 3, 4, 5];
+
   return (
     <div>
       <IssueActions />
@@ -42,4 +43,4 @@ const LoadingIssuePage = () => {
   );
 };
 
-export default LoadingIssuePage;
+export default LoadingIssuesPage;
