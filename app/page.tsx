@@ -1,7 +1,9 @@
 import prisma from "@/prisma/client";
+import { Flex, Grid } from "@radix-ui/themes";
+import { Metadata } from "next";
+import IssueChart from "./IssueChart";
 import IssueSummary from "./IssueSummary";
 import LatestIssues from "./LatestIssues";
-import IssueChart from "./IssueChart";
 
 export default async function Home() {
   const open = await prisma.issue.count({
@@ -13,5 +15,20 @@ export default async function Home() {
   const close = await prisma.issue.count({
     where: { status: "CLOSE" },
   });
-  return <IssueChart open={open} inProgress={inProgress} close={close} />;
+  return (
+    <Grid columns={{ initial: "1", md: "2" }} gap="5">
+      <Flex direction="column" gap="5">
+        <IssueSummary open={open} inProgress={inProgress} close={close} />
+        <IssueChart open={open} inProgress={inProgress} close={close} />
+      </Flex>
+      <LatestIssues />
+    </Grid>
+  );
 }
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Issue Tracker - Dashboard",
+  description: "View a summary of project issues",
+};
