@@ -8,7 +8,6 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
-  relationMode = "prisma"
 }
 
 model Issue {
@@ -25,7 +24,7 @@ model Issue {
 enum Status {
   OPEN
   IN_PROGRESS
-  CLOSE
+  CLOSED
 }
 
 model Account {
