@@ -17,7 +17,7 @@ const statuses: { label: string; value?: Status }[] = [
   },
   {
     label: "Close",
-    value: "CLOSE",
+    value: "CLOSED",
   },
 ];
 

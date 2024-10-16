@@ -13,7 +13,7 @@ export default async function Home() {
     where: { status: "IN_PROGRESS" },
   });
   const close = await prisma.issue.count({
-    where: { status: "CLOSE" },
+    where: { status: "CLOSED" },
   });
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
