@@ -29,30 +29,35 @@ const IssuesPage = async ({ searchParams }: Props) => {
   const pageSize = 10;
 
   // Fetching data
-  const issues = await prisma.issue.findMany({
-    where,
-    orderBy,
-    skip: (page - 1) * pageSize,
-    take: pageSize,
-  });
+  try {
+    const issues = await prisma.issue.findMany({
+      where,
+      orderBy,
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
 
-  const issueCount = await prisma.issue.count({ where });
+    const issueCount = await prisma.issue.count({ where });
 
-  return (
-    <Flex direction="column" gap="3">
-      <IssueActions />
-      <IssueTable
-        searchParams={searchParams}
-        issues={issues}
-        orderDirection={orderDirection}
-      />
-      <Pagination
-        pageSize={pageSize}
-        itemCount={issueCount}
-        currentPage={page}
-      />
-    </Flex>
-  );
+    return (
+      <Flex direction="column" gap="3">
+        <IssueActions />
+        <IssueTable
+          searchParams={searchParams}
+          issues={issues}
+          orderDirection={orderDirection}
+        />
+        <Pagination
+          pageSize={pageSize}
+          itemCount={issueCount}
+          currentPage={page}
+        />
+      </Flex>
+    );
+  } catch (error) {
+    console.error("Error fetching issues:", error);
+    return <div>Error fetching issues. Please try again later.</div>;
+  }
 };
 
 export const dynamic = "force-dynamic";
